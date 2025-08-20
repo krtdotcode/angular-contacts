@@ -65,6 +65,7 @@ export class ContactService {
   deleteContact(index: number) {
     if (confirm('Are you sure you want to delete this contact?')) {
       this.contacts.splice(index, 1);
+      localStorage.setItem('contacts', JSON.stringify(this.contacts));
     }
   }
 
