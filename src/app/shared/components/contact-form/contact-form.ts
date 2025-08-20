@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
-import { Contact } from '../../models/interfaces/contact.interface';
 
 @Component({
   selector: 'app-contact-form',
@@ -17,18 +16,8 @@ export class ContactForm {
   get editingIndex() {
     return this.contactService.editingIndex;
   }
-  
-  contact: Contact;
 
-  constructor(private contactService: ContactService) {
-    this.contact = {
-      id: this.contactService.getContacts().length + 1,
-      name: '',
-      phone: '',
-      email: '',
-      picture: ""
-    };
-  }
+  constructor(private contactService: ContactService) {}
 
   public addContact() {
     this.contactService.addContact();

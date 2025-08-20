@@ -6,15 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class ContactService {
-  private contacts: Contact[] = [
-    {
-      id: 1,
-      name: 'Alice Johnson',
-      phone: '9171234567',
-      email: 'alice@example.com',
-      picture: 'https://avatar.iran.liara.run/public'
-    }
-  ];
+  private contacts: Contact[] = [];
 
   contactForm: FormGroup;
 
@@ -27,6 +19,7 @@ export class ContactService {
     }
 
     this.contactForm = this.fb.group({
+      id: [this.contacts.length + 1],
       name: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -41,13 +34,31 @@ export class ContactService {
   addContact() {
     if (this.contactForm.valid) {
       if (this.editingIndex === null) {
-        this.contacts.push(this.contactForm.value);
+        const newContact = {
+        ...this.contactForm.value,
+        id: this.contacts.length > 0 ? this.contacts[this.contacts.length - 1].id + 1 : 1,
+        picture: this.contactForm.value.picture || 'https://avatar.iran.liara.run/public'
+      };
+      this.contacts.push(newContact);
       } else {
-        this.contacts[this.editingIndex] = this.contactForm.value;
-        this.editingIndex = null;
+        const updatedContact = {
+        ...this.contactForm.value,
+        id: this.contacts[this.editingIndex].id,
+        picture: this.contactForm.value.picture || 'https://avatar.iran.liara.run/public'
+      };
+      this.contacts[this.editingIndex] = updatedContact;
+      this.editingIndex = null;
       }
       localStorage.setItem('contacts', JSON.stringify(this.contacts));
-      this.contactForm.reset();
+
+      // Reset with default values
+    this.contactForm.reset({
+      id: this.contacts.length > 0 ? this.contacts[this.contacts.length - 1].id + 1 : 1,
+      name: '',
+      phone: '',
+      email: '',
+      picture: 'https://avatar.iran.liara.run/public'
+    });
     }
   }
 
