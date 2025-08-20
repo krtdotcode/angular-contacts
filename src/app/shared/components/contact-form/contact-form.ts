@@ -30,4 +30,16 @@ export class ContactForm {
   public editContact(index: number) {
     this.contactService.editContact(index);
   }
+
+  public onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.contactForm.patchValue({ picture: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }

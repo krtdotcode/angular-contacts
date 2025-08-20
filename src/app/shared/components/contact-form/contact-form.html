@@ -76,10 +76,16 @@
       <input type="email" formControlName="email" placeholder="mail@site.com" required />
     </label>
     <div class="validator-hint hidden">Enter valid email address</div>
-
+    
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Profile Picture</legend>
-      <input type="file" class="file-input" formControlName="picture" />
+      <input
+        type="file"
+        class="file-input"
+        formControlName="picture"
+        accept="image/*"
+        (change)="onFileChange($event)"
+      />
       <label class="label">Max size 2MB</label>
     </fieldset>
 
