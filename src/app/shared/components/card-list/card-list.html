@@ -1,1 +1,22 @@
-<p>card-list works!</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  @for (contact of contacts; track contact.id; let i = $index) {
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card bg-base-100 w-96 shadow-sm border-y-4 border-indigo-500 m-6">
+        <figure>
+          <img
+            [src]="contact.picture"
+            alt="Profile picture" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{contact.name}}</h2>
+          <p>📞 {{ contact.phone }}</p>
+          <p>✉️ {{ contact.email }}</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-sm btn-primary" (click)="editContact(i)">Edit</button>
+            <button class="btn btn-sm btn-error" (click)="deleteContact(i)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
