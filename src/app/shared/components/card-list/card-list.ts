@@ -8,10 +8,19 @@ import { ContactService } from '../../services/contact.service';
   styleUrl: './card-list.scss'
 })
 export class CardList {
+  sortAsc = true;
+
   constructor(public contactService: ContactService) {}
 
   get contacts() {
-    return this.contactService.getContacts();
+    return [...this.contactService.getContacts()].sort((a, b) => {
+      const cmp = a.name.localeCompare(b.name);
+      return this.sortAsc ? cmp : -cmp;
+    });
+  }
+
+  toggleSort() {
+    this.sortAsc = !this.sortAsc;
   }
 
   editContact(index: number) {
