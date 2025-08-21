@@ -19,19 +19,19 @@ export class ContactForm {
 
   constructor(private contactService: ContactService) {}
 
-  public addContact() {
+  addContact() {
     this.contactService.addContact();
   }
 
-  public deleteContact(index: number) {
-    this.contactService.deleteContact(index);
+  deleteContact(id: number) {
+    this.contactService.deleteContactById(id);
   }
 
-  public editContact(index: number) {
+  editContact(index: number) {
     this.contactService.editContact(index);
   }
 
-  public onFileChange(event: Event) {
+  onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];

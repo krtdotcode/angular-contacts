@@ -28,7 +28,7 @@
           <p>✉️ {{ contact.email }}</p>
           <div class="card-actions justify-end">
             <button class="btn btn-sm btn-primary" (click)="editContact(i)">Edit</button>
-            <button class="btn btn-sm btn-error" (click)="deleteContact(i)">Delete</button>
+            <button class="btn btn-sm btn-error" (click)="deleteContact(contact.id)">Delete</button>
           </div>
         </div>
       </div>

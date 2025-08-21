@@ -62,13 +62,14 @@ export class ContactService {
     }
   }
 
-  deleteContact(index: number) {
-    if (confirm('Are you sure you want to delete this contact?')) {
+  deleteContactById(id: number) {
+    const index = this.contacts.findIndex(c => c.id === id);
+    if (index !== -1 && confirm('Are you sure you want to delete this contact?')) {
       this.contacts.splice(index, 1);
       localStorage.setItem('contacts', JSON.stringify(this.contacts));
     }
   }
-
+  
   editContact(index: number) {
     const contact = this.contacts[index];
     this.contactForm.patchValue(contact);

@@ -27,7 +27,7 @@ export class CardList {
     this.contactService.editContact(index);
   }
 
-  deleteContact(index: number) {
-    this.contactService.deleteContact(index);
+  deleteContact(id: number) {
+    this.contactService.deleteContactById(id);
   }
 }
